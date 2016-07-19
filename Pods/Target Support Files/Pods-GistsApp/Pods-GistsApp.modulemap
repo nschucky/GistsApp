@@ -1,0 +1,6 @@
+framework module Pods_GistsApp {
+  umbrella header "Pods-GistsApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -13,6 +13,12 @@
 		193E7DFB1D3972B200B12C5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 193E7DF91D3972B200B12C5C /* Main.storyboard */; };
 		193E7DFD1D3972B200B12C5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 193E7DFC1D3972B200B12C5C /* Assets.xcassets */; };
 		193E7E001D3972B200B12C5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 193E7DFE1D3972B200B12C5C /* LaunchScreen.storyboard */; };
+		19FC6C7A1D3A7D10001FB0E9 /* GitHubAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FC6C791D3A7D10001FB0E9 /* GitHubAPIManager.swift */; };
+		19FC6C7C1D3A7DAC001FB0E9 /* GistRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FC6C7B1D3A7DAC001FB0E9 /* GistRouter.swift */; };
+		19FC6C7E1D3A820A001FB0E9 /* Gist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FC6C7D1D3A820A001FB0E9 /* Gist.swift */; };
+		19FC6C801D3A859A001FB0E9 /* ResponseJSONObjectSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FC6C7F1D3A859A001FB0E9 /* ResponseJSONObjectSerializable.swift */; };
+		19FC6C821D3A8609001FB0E9 /* AlamofireRequest+JSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FC6C811D3A8609001FB0E9 /* AlamofireRequest+JSONSerializable.swift */; };
+		6CF20C4020F0323E3C1137AE /* Pods_GistsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BB4A5F033ECA8543DC52700 /* Pods_GistsApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,14 @@
 		193E7DFC1D3972B200B12C5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		193E7DFF1D3972B200B12C5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		193E7E011D3972B200B12C5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19FC6C791D3A7D10001FB0E9 /* GitHubAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubAPIManager.swift; sourceTree = "<group>"; };
+		19FC6C7B1D3A7DAC001FB0E9 /* GistRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistRouter.swift; sourceTree = "<group>"; };
+		19FC6C7D1D3A820A001FB0E9 /* Gist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gist.swift; sourceTree = "<group>"; };
+		19FC6C7F1D3A859A001FB0E9 /* ResponseJSONObjectSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseJSONObjectSerializable.swift; sourceTree = "<group>"; };
+		19FC6C811D3A8609001FB0E9 /* AlamofireRequest+JSONSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlamofireRequest+JSONSerializable.swift"; sourceTree = "<group>"; };
+		353000369C8B91D1B3B89911 /* Pods-GistsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GistsApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-GistsApp/Pods-GistsApp.release.xcconfig"; sourceTree = "<group>"; };
+		8BB4A5F033ECA8543DC52700 /* Pods_GistsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GistsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD79462E48A933463C516F49 /* Pods-GistsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GistsApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GistsApp/Pods-GistsApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CF20C4020F0323E3C1137AE /* Pods_GistsApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +57,8 @@
 			children = (
 				193E7DF21D3972B200B12C5C /* GistsApp */,
 				193E7DF11D3972B200B12C5C /* Products */,
+				2D198DB1D51A0207DEA1F151 /* Pods */,
+				5219AF055222F50F6F195FA2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,12 +76,34 @@
 				193E7DF31D3972B200B12C5C /* AppDelegate.swift */,
 				193E7DF51D3972B200B12C5C /* MasterViewController.swift */,
 				193E7DF71D3972B200B12C5C /* DetailViewController.swift */,
+				19FC6C791D3A7D10001FB0E9 /* GitHubAPIManager.swift */,
+				19FC6C7B1D3A7DAC001FB0E9 /* GistRouter.swift */,
+				19FC6C7F1D3A859A001FB0E9 /* ResponseJSONObjectSerializable.swift */,
+				19FC6C811D3A8609001FB0E9 /* AlamofireRequest+JSONSerializable.swift */,
+				19FC6C7D1D3A820A001FB0E9 /* Gist.swift */,
 				193E7DF91D3972B200B12C5C /* Main.storyboard */,
 				193E7DFC1D3972B200B12C5C /* Assets.xcassets */,
 				193E7DFE1D3972B200B12C5C /* LaunchScreen.storyboard */,
 				193E7E011D3972B200B12C5C /* Info.plist */,
 			);
 			path = GistsApp;
+			sourceTree = "<group>";
+		};
+		2D198DB1D51A0207DEA1F151 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CD79462E48A933463C516F49 /* Pods-GistsApp.debug.xcconfig */,
+				353000369C8B91D1B3B89911 /* Pods-GistsApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		5219AF055222F50F6F195FA2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8BB4A5F033ECA8543DC52700 /* Pods_GistsApp.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +113,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 193E7E041D3972B200B12C5C /* Build configuration list for PBXNativeTarget "GistsApp" */;
 			buildPhases = (
+				34633E6521F020C56133C132 /* [CP] Check Pods Manifest.lock */,
 				193E7DEC1D3972B200B12C5C /* Sources */,
 				193E7DED1D3972B200B12C5C /* Frameworks */,
 				193E7DEE1D3972B200B12C5C /* Resources */,
+				D29A6EF7FEDAE6DDA4D00B87 /* [CP] Embed Pods Frameworks */,
+				FCF8D74CF7CEAA7BBAA7CEBC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -133,14 +175,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		34633E6521F020C56133C132 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D29A6EF7FEDAE6DDA4D00B87 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GistsApp/Pods-GistsApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FCF8D74CF7CEAA7BBAA7CEBC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GistsApp/Pods-GistsApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		193E7DEC1D3972B200B12C5C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				193E7DF81D3972B200B12C5C /* DetailViewController.swift in Sources */,
+				19FC6C7A1D3A7D10001FB0E9 /* GitHubAPIManager.swift in Sources */,
+				19FC6C801D3A859A001FB0E9 /* ResponseJSONObjectSerializable.swift in Sources */,
+				19FC6C7E1D3A820A001FB0E9 /* Gist.swift in Sources */,
 				193E7DF61D3972B200B12C5C /* MasterViewController.swift in Sources */,
+				19FC6C7C1D3A7DAC001FB0E9 /* GistRouter.swift in Sources */,
 				193E7DF41D3972B200B12C5C /* AppDelegate.swift in Sources */,
+				19FC6C821D3A8609001FB0E9 /* AlamofireRequest+JSONSerializable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +348,7 @@
 		};
 		193E7E051D3972B200B12C5C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD79462E48A933463C516F49 /* Pods-GistsApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GistsApp/Info.plist;
@@ -264,6 +360,7 @@
 		};
 		193E7E061D3972B200B12C5C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 353000369C8B91D1B3B89911 /* Pods-GistsApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GistsApp/Info.plist;
@@ -292,6 +389,7 @@
 				193E7E061D3972B200B12C5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
