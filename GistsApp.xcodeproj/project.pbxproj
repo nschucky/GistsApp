@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1917A6241D4296FB0082F4BC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1917A6231D4296FB0082F4BC /* LoginViewController.swift */; };
+		1917A6261D429A240082F4BC /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1917A6251D429A240082F4BC /* SafariServices.framework */; };
 		193E7DF41D3972B200B12C5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193E7DF31D3972B200B12C5C /* AppDelegate.swift */; };
 		193E7DF61D3972B200B12C5C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193E7DF51D3972B200B12C5C /* MasterViewController.swift */; };
 		193E7DF81D3972B200B12C5C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193E7DF71D3972B200B12C5C /* DetailViewController.swift */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1917A6231D4296FB0082F4BC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1917A6251D429A240082F4BC /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		193E7DF01D3972B200B12C5C /* GistsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GistsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		193E7DF31D3972B200B12C5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		193E7DF51D3972B200B12C5C /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -45,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1917A6261D429A240082F4BC /* SafariServices.framework in Frameworks */,
 				6CF20C4020F0323E3C1137AE /* Pods_GistsApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,6 +81,7 @@
 				193E7DF31D3972B200B12C5C /* AppDelegate.swift */,
 				193E7DF51D3972B200B12C5C /* MasterViewController.swift */,
 				193E7DF71D3972B200B12C5C /* DetailViewController.swift */,
+				1917A6231D4296FB0082F4BC /* LoginViewController.swift */,
 				19FC6C791D3A7D10001FB0E9 /* GitHubAPIManager.swift */,
 				19FC6C7B1D3A7DAC001FB0E9 /* GistRouter.swift */,
 				19FC6C7F1D3A859A001FB0E9 /* ResponseJSONObjectSerializable.swift */,
@@ -101,6 +107,7 @@
 		5219AF055222F50F6F195FA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1917A6251D429A240082F4BC /* SafariServices.framework */,
 				8BB4A5F033ECA8543DC52700 /* Pods_GistsApp.framework */,
 			);
 			name = Frameworks;
@@ -228,6 +235,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1917A6241D4296FB0082F4BC /* LoginViewController.swift in Sources */,
 				193E7DF81D3972B200B12C5C /* DetailViewController.swift in Sources */,
 				19FC6C7A1D3A7D10001FB0E9 /* GitHubAPIManager.swift in Sources */,
 				19FC6C801D3A859A001FB0E9 /* ResponseJSONObjectSerializable.swift in Sources */,
