@@ -8,13 +8,16 @@
 
 import UIKit
 import PINRemoteImage
+import SafariServices
 
-class MasterViewController: UITableViewController {
+class MasterViewController: UITableViewController, SFSafariViewControllerDelegate {
 
     var detailViewController: DetailViewController? = nil
     var gists = [Gist]()
     var nextPageURLString: String?
     var isLoading = false
+    
+    var safariVC: SFSafariViewController?
     
     var dateFormatter = NSDateFormatter()
     
@@ -35,7 +38,28 @@ class MasterViewController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        loadGists(nil)
+        //loadGists(nil)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if (!defaults.boolForKey("loadingOAuthToken")) {
+            loadInitialData()
+        }
+        
+    }
+    
+    func loadInitialData() {
+        if (!GitHubAPIManager.sharedInstance.hasOAuthToken()) {
+            showOAuthLoginView()
+        } else {
+            GitHubAPIManager.sharedInstance.printMyStarredGistsWithOAuth2()
+        }
+    }
+    
+    func showOAuthLoginView() {
+        let mainSb = UIStoryboard(name: "Main", bundle: nil)
+        if let loginVC = mainSb.instantiateViewControllerWithIdentifier("LoginVC") as? LoginViewController {
+            loginVC.delegate = self
+            presentViewController(loginVC, animated: true, completion: nil)
+        }
     }
     
     func insertNewObject(sender: AnyObject) {
@@ -165,3 +189,32 @@ class MasterViewController: UITableViewController {
 
 }
 
+
+extension MasterViewController: LoginViewDelegate {
+    
+    
+    func didTapLoginButton() {
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setBool(true, forKey: "loadingOAuthToken")
+        
+        self.dismissViewControllerAnimated(false, completion: nil)
+        if let authURL = GitHubAPIManager.sharedInstance.URLToStartOAuth2Login() {
+            safariVC = SFSafariViewController(URL: authURL)
+            safariVC?.delegate = self
+            if let webViewController = safariVC {
+                self.presentViewController(webViewController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func safariViewController(controller: SFSafariViewController, didCompleteInitialLoad
+        didLoadSuccessfully: Bool) {
+        // Detect not being able to load the OAuth URL
+        if (!didLoadSuccessfully) {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setBool(false, forKey: "loadingOAuthToken")
+            controller.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
+}

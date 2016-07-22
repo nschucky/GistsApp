@@ -121,6 +121,45 @@
             </objects>
             <point key="canvasLocation" x="709" y="-630"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="qs6-Zp-A9D">
+            <objects>
+                <viewController storyboardIdentifier="LoginVC" id="ogl-5e-FrD" customClass="LoginViewController" customModule="GistsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QRV-qT-IJX"/>
+                        <viewControllerLayoutGuide type="bottom" id="n1K-1s-c14"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FLZ-I8-Id1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m8e-QV-nOj">
+                                <rect key="frame" x="205" y="280" width="190" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="Log In with GitHub"/>
+                                <connections>
+                                    <action selector="tappedLoginButton:" destination="ogl-5e-FrD" eventType="touchUpInside" id="fOu-TW-i4x"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zwc-no-q6m">
+                                <rect key="frame" x="270.5" y="354" width="59" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Cancel"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="m8e-QV-nOj" firstAttribute="centerX" secondItem="FLZ-I8-Id1" secondAttribute="centerX" id="HKi-Z1-3k3"/>
+                            <constraint firstItem="Zwc-no-q6m" firstAttribute="top" secondItem="m8e-QV-nOj" secondAttribute="bottom" constant="34" id="mpn-LV-0XS"/>
+                            <constraint firstItem="Zwc-no-q6m" firstAttribute="centerX" secondItem="FLZ-I8-Id1" secondAttribute="centerX" id="svi-M8-OAW"/>
+                            <constraint firstItem="m8e-QV-nOj" firstAttribute="centerY" secondItem="FLZ-I8-Id1" secondAttribute="centerY" id="yE5-DH-wfd"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dMv-re-DOP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1394" y="-630"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="r7l-gg-dq7">
             <objects>
