@@ -40,8 +40,8 @@ class GitHubAPIManager {
         }
     }
     
-    let cid = "3e571894a6b9f9ed9897"
-    let cs = "cb98c9407eabc6c98e6507b5d8466f226a19c08d"
+    let cid = "ausdhfuhasd"
+    let cs = "dfuahdfa9df89a8df9bn8adf"
     
     
     init() {
