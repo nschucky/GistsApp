@@ -47,10 +47,22 @@ class MasterViewController: UITableViewController, SFSafariViewControllerDelegat
     }
     
     func loadInitialData() {
+        isLoading = true
+        GitHubAPIManager.sharedInstance.OAuthTokenCompletionHandler = { (error) -> Void in
+            self.safariVC?.dismissViewControllerAnimated(true, completion: nil)
+            if let error = error {
+                print(error)
+                self.isLoading = false
+                
+                self.showOAuthLoginView()
+            } else {
+                self.loadGists(nil)
+            }
+        }
         if (!GitHubAPIManager.sharedInstance.hasOAuthToken()) {
-            showOAuthLoginView()
+            self.showOAuthLoginView()
         } else {
-            GitHubAPIManager.sharedInstance.printMyStarredGistsWithOAuth2()
+            loadGists(nil)
         }
     }
     
@@ -84,6 +96,9 @@ class MasterViewController: UITableViewController, SFSafariViewControllerDelegat
     }
     
     func refresh(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setBool(false, forKey: "loadingOAuthToken")
+        
         nextPageURLString = nil
         loadGists(nil)
     }
@@ -95,7 +110,7 @@ class MasterViewController: UITableViewController, SFSafariViewControllerDelegat
 
     func loadGists(urlToLoad: String?) {
         isLoading = true
-        GitHubAPIManager.sharedInstance.getPublicGists(urlToLoad) { (result, nextPage) in
+        GitHubAPIManager.sharedInstance.getMyStarredGists(urlToLoad) { (result, nextPage) in
             self.isLoading = false
             self.nextPageURLString = nextPage
             
@@ -104,6 +119,14 @@ class MasterViewController: UITableViewController, SFSafariViewControllerDelegat
             }
             guard result.error == nil else {
                 print(result.error)
+                self.nextPageURLString = nil
+                
+                self.isLoading = false
+                if let error = result.error {
+                    if error.domain == NSURLErrorDomain && error.code == NSURLErrorUserAuthenticationRequired {
+                        self.showOAuthLoginView()
+                    }
+                }
                 return
             }
             if let fetchedGists = result.value {
@@ -205,6 +228,14 @@ extension MasterViewController: LoginViewDelegate {
             if let webViewController = safariVC {
                 self.presentViewController(webViewController, animated: true, completion: nil)
             }
+        } else {
+            defaults.setBool(false, forKey: "loadingOAuthToken")
+            if let completion = GitHubAPIManager.sharedInstance.OAuthTokenCompletionHandler {
+                let error = NSError(domain: GitHubAPIManager.ErrorDomain, code: -1, userInfo:
+                    [ NSLocalizedDescriptionKey: "Could not create an OAuth authorization URL",
+                    NSLocalizedRecoverySuggestionErrorKey: "Please retry your request"])
+                completion(error)
+            }
         }
     }
     
@@ -214,6 +245,14 @@ extension MasterViewController: LoginViewDelegate {
         if (!didLoadSuccessfully) {
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setBool(false, forKey: "loadingOAuthToken")
+            
+            if let completion = GitHubAPIManager.sharedInstance.OAuthTokenCompletionHandler {
+                let error = NSError(domain: NSURLErrorDomain, code: NSURLErrorNotConnectedToInternet,
+                                    userInfo: [NSLocalizedDescriptionKey: "No Internet Connection",
+                                        NSLocalizedRecoverySuggestionErrorKey: "Please retry your request"])
+                completion(error)
+            }
+            
             controller.dismissViewControllerAnimated(true, completion: nil)
         }
     }
