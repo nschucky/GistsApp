@@ -5,4 +5,5 @@ target 'GistsApp' do
     pod 'SwiftyJSON'
     pod 'Alamofire', '~> 3.4'
     pod 'PINRemoteImage'
+    pod 'Locksmith'
 end

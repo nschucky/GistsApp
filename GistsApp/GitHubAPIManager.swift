@@ -9,17 +9,39 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import Locksmith
 
 
 class GitHubAPIManager {
     
     static let sharedInstance = GitHubAPIManager()
+    static let ErrorDomain = "com.error.GitHubAPIManager"
     var alamofireManager: Alamofire.Manager
     
-    var OAuthToken: String?
+    var OAuthTokenCompletionHandler: (NSError? -> Void)?
     
-    let cid = "123123"
-    let cs = "adfasdfas"
+    var OAuthToken: String? {
+        set {
+            if let valueToSave = newValue {
+                do {
+                    try Locksmith.updateData(["token": valueToSave], forUserAccount: "github")
+                } catch {
+                    let _ = try? Locksmith.deleteDataForUserAccount("github")
+                }
+            }
+        }
+        get {
+            Locksmith.loadDataForUserAccount("github")
+            let dictionary = Locksmith.loadDataForUserAccount("github")
+            if let token = dictionary?["token"] as? String {
+                return token
+            }
+            return nil
+        }
+    }
+    
+    let cid = "3e571894a6b9f9ed9897"
+    let cs = "cb98c9407eabc6c98e6507b5d8466f226a19c08d"
     
     
     init() {
@@ -27,6 +49,15 @@ class GitHubAPIManager {
         alamofireManager = Alamofire.Manager(configuration: configuration)
     }
     
+    func checkUnauthorized(urlResponse: NSHTTPURLResponse) -> NSError? {
+        if urlResponse.statusCode == 401 {
+            self.OAuthToken = nil
+            let lostOAuthError = NSError(domain: NSURLErrorDomain, code: NSURLErrorUserAuthenticationRequired, userInfo:  [NSLocalizedDescriptionKey: "Not Logged In",
+                NSLocalizedRecoverySuggestionErrorKey: "Please re-enter your GitHub credentials"])
+            return lostOAuthError
+        }
+        return nil
+    }
     
     func getPublicGists(pageToLoad: String?, completionHandler: (Result<[Gist], NSError>, String?) -> Void)  {
         if let urlString = pageToLoad {
@@ -40,6 +71,9 @@ class GitHubAPIManager {
         alamofireManager.request(urlRequet)
         .validate()
         .responseArrayy { (response: Response<[Gist], NSError>) in
+                if let urlResponse = response.response, authError = self.checkUnauthorized(urlResponse) {
+                    completionHandler(.Failure(authError), nil)
+                }
                 guard response.result.error == nil, let gists = response.result.value else {
                     print(response.result.error)
                     completionHandler(response.result, nil)
@@ -51,16 +85,26 @@ class GitHubAPIManager {
     }
     
     func printMyStarredGistsWithOAuth2() -> Void {
-        alamofireManager.request(GistRouter.GetMyStarred())
+        let starredGists = alamofireManager.request(GistRouter.GetMyStarred())
             .responseString { response in
                 guard response.result.error == nil else {
                     print(response.result.error!)
+                    GitHubAPIManager.sharedInstance.OAuthToken = nil
                     return
                 }
                 if let receivedString = response.result.value {
                     print(receivedString)
                 }
                 
+        }
+        print(starredGists)
+    }
+    
+    func getMyStarredGists(pageToLoad: String?, completionHandler:(Result<[Gist], NSError>, String?) -> Void) {
+        if let urlString = pageToLoad {
+            getGists(GistRouter.GetAtPath(urlString), completionHandler: completionHandler)
+        } else {
+            getGists(GistRouter.GetMyStarred(), completionHandler: completionHandler)
         }
     }
     
@@ -89,7 +133,9 @@ class GitHubAPIManager {
                     let defaults = NSUserDefaults.standardUserDefaults()
                     defaults.setBool(false, forKey: "loadingOAuthToken")
                     // TODO: bubble up error
-                    print(error)
+                    if let completion = self.OAuthTokenCompletionHandler {
+                        completion(error)
+                    }
                     return
                 }
                 print(response.result.value)
@@ -116,8 +162,15 @@ class GitHubAPIManager {
                 }
                 let defaults = NSUserDefaults.standardUserDefaults()
                 defaults.setBool(false, forKey: "loadingOAuthToken")
-                if (self.hasOAuthToken()) {
-                    self.printMyStarredGistsWithOAuth2()
+                if let completion = self.OAuthTokenCompletionHandler {
+                    if self.hasOAuthToken() {
+                        completion(nil)
+                    } else {
+                        let noOAuthError = NSError(domain: GitHubAPIManager.ErrorDomain, code: -1, userInfo:
+                            [NSLocalizedDescriptionKey: "Could not obtain an OAuth token",
+                                NSLocalizedRecoverySuggestionErrorKey: "Please retry your request"])
+                        completion(noOAuthError)
+                    }
                 }
         }
     }
@@ -139,6 +192,13 @@ class GitHubAPIManager {
             // no code in URL that we launched with
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setBool(false, forKey: "loadingOAuthToken")
+            
+            if let completion = self.OAuthTokenCompletionHandler {
+                let noCodeInResponseError = NSError(domain: GitHubAPIManager.ErrorDomain, code: -1,
+                                                    userInfo: [NSLocalizedDescriptionKey: "Could not obtain an OAuth code",
+                                                        NSLocalizedRecoverySuggestionErrorKey: "Please retry your request"])
+                completion(noCodeInResponseError)
+            }
         }
     }
     
