@@ -43,7 +43,6 @@ class GitHubAPIManager {
     let cid = "asdasd"
     let cs = "asdasdasdasdas"
     
-    
     init() {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         alamofireManager = Alamofire.Manager(configuration: configuration)
