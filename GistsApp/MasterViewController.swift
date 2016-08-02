@@ -9,8 +9,11 @@
 import UIKit
 import PINRemoteImage
 import SafariServices
+import Alamofire
 
 class MasterViewController: UITableViewController, SFSafariViewControllerDelegate {
+    
+    @IBOutlet weak var gistsSegmentedControl: UISegmentedControl!
 
     var detailViewController: DetailViewController? = nil
     var gists = [Gist]()
@@ -46,6 +49,9 @@ class MasterViewController: UITableViewController, SFSafariViewControllerDelegat
         
     }
     
+    @IBAction func segmentedChanged(sender: UISegmentedControl) {
+        loadGists(nil)
+    }
     func loadInitialData() {
         isLoading = true
         GitHubAPIManager.sharedInstance.OAuthTokenCompletionHandler = { (error) -> Void in
@@ -110,7 +116,9 @@ class MasterViewController: UITableViewController, SFSafariViewControllerDelegat
 
     func loadGists(urlToLoad: String?) {
         isLoading = true
-        GitHubAPIManager.sharedInstance.getMyStarredGists(urlToLoad) { (result, nextPage) in
+        
+        let completiomHandler: (Result<[Gist], NSError>, String?) -> Void = { (result, nextPage) in
+            
             self.isLoading = false
             self.nextPageURLString = nextPage
             
@@ -136,10 +144,22 @@ class MasterViewController: UITableViewController, SFSafariViewControllerDelegat
                     self.gists = fetchedGists
                 }
             }
+            
             let now = NSDate()
             let updateString = "Last updated at " + self.dateFormatter.stringFromDate(now)
             self.refreshControl?.attributedTitle = NSAttributedString(string: updateString)
+            
             self.tableView.reloadData()
+        }
+        
+        switch gistsSegmentedControl.selectedSegmentIndex {
+        case 0:
+            GitHubAPIManager.sharedInstance.getPublicGists(urlToLoad, completionHandler: completiomHandler)
+        case 1:
+            GitHubAPIManager.sharedInstance.getMyStarredGists(urlToLoad, completionHandler: completiomHandler)
+        case 2:
+            GitHubAPIManager.sharedInstance.getMyGists(urlToLoad, completionHandler: completiomHandler)
+        default: break
         }
     }
 

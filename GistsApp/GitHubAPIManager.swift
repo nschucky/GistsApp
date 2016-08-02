@@ -40,8 +40,8 @@ class GitHubAPIManager {
         }
     }
     
-    let cid = "3e571894a6b9f9ed9897"
-    let cs = "cb98c9407eabc6c98e6507b5d8466f226a19c08d"
+    let cid = "asdasd"
+    let cs = "asdasdasdasdas"
     
     
     init() {
@@ -64,6 +64,15 @@ class GitHubAPIManager {
             getGists(GistRouter.GetAtPath(urlString), completionHandler: completionHandler)
         } else {
             getGists(GistRouter.GetPublic(), completionHandler: completionHandler)
+        }
+    }
+    
+    func getMyGists(pageToLoad: String?, completionHandler: (Result<[Gist], NSError>, String?) -> Void) {
+        if let urlString = pageToLoad {
+            getGists(GistRouter.GetAtPath(urlString), completionHandler: completionHandler)
+            print("Tamo aki com a url \(urlString)")
+        } else {
+            getGists(GistRouter.GetMine(), completionHandler: completionHandler)
         }
     }
     
