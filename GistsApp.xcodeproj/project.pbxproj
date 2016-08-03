@@ -15,6 +15,7 @@
 		193E7DFB1D3972B200B12C5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 193E7DF91D3972B200B12C5C /* Main.storyboard */; };
 		193E7DFD1D3972B200B12C5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 193E7DFC1D3972B200B12C5C /* Assets.xcassets */; };
 		193E7E001D3972B200B12C5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 193E7DFE1D3972B200B12C5C /* LaunchScreen.storyboard */; };
+		19D5224B1D516CAB002BCDF5 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D5224A1D516CAB002BCDF5 /* File.swift */; };
 		19FC6C7A1D3A7D10001FB0E9 /* GitHubAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FC6C791D3A7D10001FB0E9 /* GitHubAPIManager.swift */; };
 		19FC6C7C1D3A7DAC001FB0E9 /* GistRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FC6C7B1D3A7DAC001FB0E9 /* GistRouter.swift */; };
 		19FC6C7E1D3A820A001FB0E9 /* Gist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FC6C7D1D3A820A001FB0E9 /* Gist.swift */; };
@@ -34,6 +35,7 @@
 		193E7DFC1D3972B200B12C5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		193E7DFF1D3972B200B12C5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		193E7E011D3972B200B12C5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19D5224A1D516CAB002BCDF5 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		19FC6C791D3A7D10001FB0E9 /* GitHubAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubAPIManager.swift; sourceTree = "<group>"; };
 		19FC6C7B1D3A7DAC001FB0E9 /* GistRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistRouter.swift; sourceTree = "<group>"; };
 		19FC6C7D1D3A820A001FB0E9 /* Gist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gist.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				193E7DF71D3972B200B12C5C /* DetailViewController.swift */,
 				1917A6231D4296FB0082F4BC /* LoginViewController.swift */,
 				19FC6C791D3A7D10001FB0E9 /* GitHubAPIManager.swift */,
+				19D5224A1D516CAB002BCDF5 /* File.swift */,
 				19FC6C7B1D3A7DAC001FB0E9 /* GistRouter.swift */,
 				19FC6C7F1D3A859A001FB0E9 /* ResponseJSONObjectSerializable.swift */,
 				19FC6C811D3A8609001FB0E9 /* AlamofireRequest+JSONSerializable.swift */,
@@ -240,6 +243,7 @@
 				19FC6C7A1D3A7D10001FB0E9 /* GitHubAPIManager.swift in Sources */,
 				19FC6C801D3A859A001FB0E9 /* ResponseJSONObjectSerializable.swift in Sources */,
 				19FC6C7E1D3A820A001FB0E9 /* Gist.swift in Sources */,
+				19D5224B1D516CAB002BCDF5 /* File.swift in Sources */,
 				193E7DF61D3972B200B12C5C /* MasterViewController.swift in Sources */,
 				19FC6C7C1D3A7DAC001FB0E9 /* GistRouter.swift in Sources */,
 				193E7DF41D3972B200B12C5C /* AppDelegate.swift in Sources */,

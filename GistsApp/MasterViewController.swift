@@ -170,7 +170,7 @@ class MasterViewController: UITableViewController, SFSafariViewControllerDelegat
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let object = gists[indexPath.row]
                 if let detailViewController = (segue.destinationViewController as! UINavigationController).topViewController as? DetailViewController {
-                    detailViewController.detailItem = object
+                    detailViewController.gist = object
                     detailViewController.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                     detailViewController.navigationItem.leftItemsSupplementBackButton = true
                 }
